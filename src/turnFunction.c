@@ -1,12 +1,5 @@
 #include <stdio.h>
 
-
-int play(int numPlayer, int tab[][3], int C, int L);
-int getValueAt(int x, int y, int tab[][3]);
-void getCardCoords(int *x ,int *y ,int C,int L);
-int checkRange(int number, int maxRange);
-
-
 int play(int numPlayer, int tab[][3], int C, int L) {
   int x,y;
   //display grid
@@ -45,7 +38,7 @@ void getCardCoords(int *x, int *y, int C, int L) {
   scanf("%d", y);
   if(checkRange(*y,L)) break;
   printf("The value exceeds the table size, please enter a value between 1 and %d", L);
-  printf("row: ");
+  printf("\nrow: ");
   }
   printf("\n");
 }
@@ -55,6 +48,7 @@ int checkRange(int number, int maxRange) {
   return 0;
 }
 
+/*
 int main() {
   int x, y;
   int tab[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
@@ -63,4 +57,4 @@ int main() {
 
   return 0;
 }
-
+*/
