@@ -46,9 +46,9 @@ int testPlay(){
 }
 
 int main() {
-  //testGetValueAt();
-  //testGetCardCoords();
-  //testCheckRange();
+  testGetValueAt();
+  testGetCardCoords();
+  testCheckRange();
   testPlay();
 
   return 0;
