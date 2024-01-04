@@ -4,6 +4,20 @@
 
 
 void strucGeneration(int *C, int *L) {
+    /**
+   * What the function does: Generates the values of C and L by prompting the user to choose them.
+   *
+   * Parameters:
+   *      - C: Pointer to the variable where the value of C is to be stored.
+   *      - L: Pointer to the variable where the value of L is to be stored.
+   *
+   * Local variables:
+   *      - 
+   *      - 
+   *
+   * Return:
+   *      -
+   */
     do {
         printf("Choisissez la valeur de C (5, 7, 9): ");
         scanf("%d", C);
@@ -26,76 +40,51 @@ void strucGeneration(int *C, int *L) {
     } while (*L != 3 && *L != 5 && *L != 7);
 }
 
+void tabGeneration(int C, int L, int tab[L][C]) {
+    /**
+   * What the function does: Generates a table of dimensions C x L and fills it with ordered values,
+   *                       then performs random exchanges to shuffle the elements of the table.
+   *
+   * Parameters:
+   *      - C: Number of columns in the table.
+   *      - L: Number of rows in the table.
+   *
+   * Local variables:
+   *      - n: The total number of elements in the table.
+   *      - count: The initial value for filling the table.
+   *      - pos: The current position in the table.
+   *
+   * Return:
+   *      - A dynamically allocated 2D array filled and shuffled.
+   */
+    int n = C*L;
+    int count = 1;
+    int pos = 0;
+    srand((unsigned int)time(NULL));
 
-int **tabGeneration(int C, int L) {
-    int n = C * L;
-
-
-    // Allocation dynamique pour le tableau
-    int **tab = (int **)malloc(L * sizeof(int *));
-    for (int i = 0; i < L; i++) {
-        tab[i] = (int *)malloc(C * sizeof(int));
-    }
-
-
-    // Initialisation du générateur de nombres aléatoires
-    srand(time(NULL));
-
-
-    // Initialisation du tableau avec des zéros
-    for (int i = 0; i < L; i++) {
-        for (int j = 0; j < C; j++) {
-            tab[i][j] = 0;
+    for(int l=0; l<L; l++){
+      for(int c=0; c<C; c++){
+        tab[l][c] = count;
+        pos += 1;
+        if(pos%2==0) count+=1;
         }
     }
+    tab[L-1][C-1]=0;
 
-
-    // Remplissage initial du tableau avec les paires
-    int counter = 1;
-    int *positions = (int *)malloc(n * sizeof(int));
-
-
-    for (int i = 0; i < n; i++) {
-        positions[i] = i;
-    }
-
-
-    // Permutation aléatoire du tableau
-    for (int i = 0; i < C; i++) {
-        for (int j = 0; j < L; j++) {
-            int rx = rand() % C;
-            int ry = rand() % L;
-            int temp = tab[j][i];
-            tab[j][i] = tab[ry][rx];
-            tab[ry][rx] = temp;
+    for(int l=0; l<L; l++){
+        for(int c=0; c<C; c++){
+            int x = rand() % C;
+            int y = rand() % L;
+            int temp = tab[y][x];
+            tab[y][x] = tab[l][c];
+            tab[l][c] = temp;
         }
     }
-
-
-    // Placement des paires dans le tableau
-    for (int i = 0; i < n / 2; i++) {
-        int row1 = positions[2 * i] / C;
-        int col1 = positions[2 * i] % C;
-        int row2 = positions[2 * i + 1] / C;
-        int col2 = positions[2 * i + 1] % C;
-
-
-        tab[row1][col1] = counter;
-        tab[row2][col2] = counter;
-
-
-        counter++;
-    }
-
-
-    free(positions);
-
-
-    return tab;
 }
 
 
-void afficherTableau(int **tab, int C, int L) {
+
+void afficherTableau(int C, int L, int tab[L][C]) {
     for (int i = 0; i < L; i++) {
         for (int j = 0; j < C; j++) {
             printf("%d ", tab[i][j]);
@@ -104,20 +93,3 @@ void afficherTableau(int **tab, int C, int L) {
     }
 }
 
-
-/*int main() {
-    int C, L;
-    strucGeneration(&C, &L);
-    int **tab = tabGeneration(C, L);
-    afficherTableau(tab, C, L);
-
-
-    // Libération de la mémoire allouée pour le tableau
-    for (int i = 0; i < L; i++) {
-        free(tab[i]);
-    }
-    free(tab);
-
-
-    return 0;
-}*/
