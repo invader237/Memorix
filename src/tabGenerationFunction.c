@@ -61,7 +61,6 @@ void tabGeneration(int C, int L, int tab[L][C]) {
     int count = 1;
     int pos = 0;
     srand((unsigned int)time(NULL));
-
     for(int l=0; l<L; l++){
       for(int c=0; c<C; c++){
         tab[l][c] = count;
@@ -70,18 +69,25 @@ void tabGeneration(int C, int L, int tab[L][C]) {
         }
     }
     tab[L-1][C-1]=0;
+    tabRandomization(C, L, tab);
+}
 
+void tabRandomization(int C , int L, int tab[][C]){
+    
     for(int l=0; l<L; l++){
         for(int c=0; c<C; c++){
-            int x = rand() % C;
-            int y = rand() % L;
-            int temp = tab[y][x];
-            tab[y][x] = tab[l][c];
-            tab[l][c] = temp;
+            randomSwap(C, L, c, l, tab);        
         }
     }
 }
 
+void randomSwap(int C, int L, int c, int l, int tab[][C]){
+    int x = rand() % C;
+    int y = rand() % L;
+    int temp = tab[y][x];
+    tab[y][x] = tab[l][c];
+    tab[l][c] = temp;
+}
 
 
 void afficherTableau(int C, int L, int tab[L][C]) {
