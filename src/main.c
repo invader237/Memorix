@@ -20,6 +20,8 @@ int checkBot(char answ){
 int main(){
   int C, L;
   int numberOfPlayer = 0;
+  int turnScore = 0;
+  int playerNumber = 1;
   char botAnsw;
   char layer[][9][2] = {
         {{'*', '*'}, {'*', '*'}, {'*', '*'}, {'*', '*'}, {'*', '*'}},
@@ -41,9 +43,17 @@ int main(){
     scanf("%c", &botAnsw);
   }
   while(1){
-    layerDisplay(tab, C, L);
     layerDisplay(layer, C, L);
-    play(1, C, L, tab);
-    
+    turnScore = play(playerNumber, C, L, tab, layer);
+    layerReset(layer, C, L);
+    if(turnScore == 1){
+      printf("\nYou have won 1 point, you can play again\n");
+      //increment player score
+    }
+    else if(turnScore == 0){
+      printf("You haven't found a match\n");
+      playerNumber += 1;
+      if(playerNumber > numberOfPlayer) playerNumber = 1;
+    }
   }
 }
