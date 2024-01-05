@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../include/displayFunctionHeader.h"
 
 #define CYAN    "\x1b[36m"
 #define GREEN   "\x1b[32m"
