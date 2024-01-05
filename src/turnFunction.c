@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include "../include/turnFunctionHeader.h"
+#include "../include/displayFunctionHeader.h"
 
-int play(int numPlayer, int C, int L, int tab[][C]) {
+int play(int numPlayer, int C, int L, int tab[][C], int layer[][C][2]) {
   /**
    * play - Function to simulate a turn for a player in a memory matching game.
    *
@@ -20,18 +22,19 @@ int play(int numPlayer, int C, int L, int tab[][C]) {
    *      - int: Always returns 0.
    */
   int x,y;
-  //display grid
   printf("Player %d turn\n", numPlayer);
   
   printf("Choose a card");
   getCardCoords(&x,&y, C, L);
   int firstCard = tab[y-1][x-1];
-  printf("%d\n", firstCard);
+  layerEdit(x, y, layer, tab, C, L);
+  layerDisplay(layer, C, L);
 
   printf("Choose another card");
   getCardCoords(&x,&y, C, L);
   int secCard = tab[y-1][x-1];
-  printf("%d\n", secCard);
+  layerEdit(x, y, layer, tab, C, L);
+  layerDisplay(layer, C, L);
 
   if(firstCard == secCard) return 1;
 
