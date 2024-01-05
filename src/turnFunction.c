@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int play(int numPlayer, int tab[][3], int C, int L) {
+int play(int numPlayer, int C, int L, int tab[][C]) {
   /**
    * play - Function to simulate a turn for a player in a memory matching game.
    *
@@ -25,32 +25,17 @@ int play(int numPlayer, int tab[][3], int C, int L) {
   
   printf("Choose a card");
   getCardCoords(&x,&y, C, L);
-  int firstCard = getValueAt(x,y, tab);
+  int firstCard = tab[y-1][x-1];
   printf("%d\n", firstCard);
 
   printf("Choose another card");
   getCardCoords(&x,&y, C, L);
-  int secCard = getValueAt(x,y, tab);
+  int secCard = tab[y-1][x-1];
   printf("%d\n", secCard);
 
-  if(firstCard == secCard) printf("win\n");
+  if(firstCard == secCard) return 1;
 
   return 0;
-}
-
-int getValueAt(int x, int y, int tab[][3]) {
-  /**
-   * getValueAt - Function to get the value at a specific position in the grid.
-   *
-   * Parameters:
-   *      - x (int): Column coordinate.
-   *      - y (int): Row coordinate.
-   *      - tab[][3] (int): 2D array representing the game grid.
-   *
-   * Return:
-   *      - int: Value at the specified position in the grid.
-   */
-  return tab[x][y];
 }
 
 void getCardCoords(int *x, int *y, int C, int L) {
@@ -66,20 +51,18 @@ void getCardCoords(int *x, int *y, int C, int L) {
    * Return:
    *      - void
    */
-  printf("\ncolumn: ");
-  while (1){
-  scanf("%d", x);
-  if(checkRange(*x, C)) break;
-  printf("The value exceeds the table size, please enter a value between 1 and %d", C);
-  printf("\ncolumn: ");
+  while (1) {
+    printf("\ncolumn: ");
+    scanf("%d", x);
+    if (checkRange(*x, C)) break;
+    printf("The value exceeds the table size, please enter a value between 1 and %d\n", C);
   }
 
-  printf("row: ");
   while (1) {
-  scanf("%d", y);
-  if(checkRange(*y,L)) break;
-  printf("The value exceeds the table size, please enter a value between 1 and %d", L);
-  printf("\nrow: ");
+    printf("row: ");
+    scanf("%d", y);
+    if (checkRange(*y, L)) break;
+    printf("The value exceeds the table size, please enter a value between 1 and %d\n", L);
   }
   printf("\n");
 }
