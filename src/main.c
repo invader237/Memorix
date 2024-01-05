@@ -21,6 +21,14 @@ int main(){
   int C, L;
   int numberOfPlayer = 0;
   char botAnsw;
+  char layer[][9][2] = {
+        {{'*', '*'}, {'*', '*'}, {'*', '*'}, {'*', '*'}, {'*', '*'}},
+        {{'*', '*'}, {'*', '*'}, {'*', '*'}, {'*', '*'}, {'*', '*'}},
+        {{'*', '*'}, {'*', '*'}, {'*', '*'}, {'*', '*'}, {'*', '*'}},
+        {{'*', '*'}, {'*', '*'}, {'*', '*'}, {'*', '*'}, {'*', '*'}},
+        {{'*', '*'}, {'*', '*'}, {'*', '*'}, {'*', '*'}, {'*', '*'}}
+    };
+  
   strucGeneration(&C, &L);
   int tab[L][C];
   tabGeneration(C, L, tab);
@@ -33,6 +41,9 @@ int main(){
     scanf("%c", &botAnsw);
   }
   while(1){
+    layerDisplay(tab, C, L);
+    layerDisplay(layer, C, L);
+    play(1, C, L, tab);
     
   }
 }
