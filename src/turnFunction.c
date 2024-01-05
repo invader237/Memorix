@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "../include/turnFunctionHeader.h"
 #include "../include/displayFunctionHeader.h"
+#include "../include/tabGenerationHeader.h"
 
 int play(int numPlayer, int C, int L, int tab[][C], int layer[][C][2]) {
   /**
@@ -22,22 +23,29 @@ int play(int numPlayer, int C, int L, int tab[][C], int layer[][C][2]) {
    *      - int: Always returns 0.
    */
   int x,y;
-  printf("Player %d turn\n", numPlayer);
+  printf("\nPlayer %d turn\n", numPlayer);
   
   printf("Choose a card");
   getCardCoords(&x,&y, C, L);
   int firstCard = tab[y-1][x-1];
   layerEdit(x, y, layer, tab, C, L);
   layerDisplay(layer, C, L);
+  if(firstCard == 0){
+    randomSwap(C, L, x, y, tab);
+    return -1;
+  }
 
   printf("Choose another card");
   getCardCoords(&x,&y, C, L);
   int secCard = tab[y-1][x-1];
   layerEdit(x, y, layer, tab, C, L);
   layerDisplay(layer, C, L);
+  if(secCard == 0){
+    randomSwap(C, L, x, y, tab);
+    return -1;
+  }
 
   if(firstCard == secCard) return 1;
-
   return 0;
 }
 
