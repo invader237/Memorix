@@ -1,9 +1,13 @@
 #include <stdio.h>
+#include <string.h>
 #include "../include/turnFunctionHeader.h"
 #include "../include/displayFunctionHeader.h"
 #include "../include/tabGenerationHeader.h"
 
-int play(int numPlayer, int C, int L, int tab[][C], int layer[][C][2]) {
+#define RED     "\x1b[31m"
+#define RESET   "\x1b[0m"
+
+int play(int numPlayer, int C, int L, int tab[][C], char layer[L][C][2]) {
   /**
    * play - Function to simulate a turn for a player in a memory matching game.
    *
@@ -22,30 +26,67 @@ int play(int numPlayer, int C, int L, int tab[][C], int layer[][C][2]) {
    * Return:
    *      - int: Always returns 0.
    */
-  int x,y;
+  int x1,y1,x2,y2;
   printf("\nPlayer %d turn\n", numPlayer);
   
-  printf("Choose a card");
-  getCardCoords(&x,&y, C, L);
-  int firstCard = tab[y-1][x-1];
-  layerEdit(x, y, layer, tab, C, L);
-  layerDisplay(layer, C, L);
+
+  printf("Choose a card :");
+  getCardCoords(&x1,&y1, C, L);
+  if(tab[y1-1][x1-1] == -1){
+    while(tab[y1-1][x1-1] == -1){
+      printf(RED"Invalid card, pair has already been found"RESET);
+      printf("\nGive other coords :");
+      getCardCoords(&x1,&y1, C, L);
+    }
+  }
+  int firstCard = tab[y1-1][x1-1];
+  layerEdit(x1, y1, C, L, layer, tab);
+  printf("\033[H\033[J");
+  layerDisplay(C, L, layer);
   if(firstCard == 0){
-    randomSwap(C, L, x, y, tab);
+    randomSwap(C, L, x1-1, y1-1, tab);
     return -1;
   }
 
-  printf("Choose another card");
-  getCardCoords(&x,&y, C, L);
-  int secCard = tab[y-1][x-1];
-  layerEdit(x, y, layer, tab, C, L);
-  layerDisplay(layer, C, L);
+  printf("\nPlayer %d turn\n", numPlayer);
+  printf("Choose another card :");
+  getCardCoords(&x2,&y2, C, L);
+  if(tab[y2-1][x2-1] == -1){
+    while(tab[y2-1][x2-1] == -1){
+      printf(RED"Invalid card, pair has already been found"RESET);
+      printf("\nGive other coords :");
+      getCardCoords(&x2,&y2, C, L);
+    }
+  }
+  if(x1==x2 && y1 == y2){
+    while(x1==x2 && y1 == y2){
+      printf(RED"Invalid card, you have already selected it"RESET);
+      printf("\nGive other coords :");
+      getCardCoords(&x2,&y2, C, L);
+    }
+  }
+  int secCard = tab[y2-1][x2-1];
+  layerEdit(x2, y2, C, L, layer, tab);
+  printf("\033[H\033[J");
+  layerDisplay(C, L, layer);
   if(secCard == 0){
-    randomSwap(C, L, x, y, tab);
+    randomSwap(C, L, x2-1, y2-1, tab);
     return -1;
   }
 
-  if(firstCard == secCard) return 1;
+  if(firstCard == secCard){
+
+    layer[x1-1][x1-1][0] = 'X';
+    layer[y1-1][x1-1][1] = 'X';
+    tab[y1-1][x1-1] = -1;
+
+    layer[y2-1][x2-1][0] = 'X';
+    layer[y2-1][x2-1][1] = 'X';
+    tab[y2-1][x2-1] = -1;
+
+    layerDisplay(C, L, layer);
+    return 1;
+  }
   return 0;
 }
 
