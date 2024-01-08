@@ -102,14 +102,18 @@ int main(){
             printf(RED"You have found the joker.\nYou lost a point\n"RESET);
             playerNumber += 1;
             if (playerNumber > numberOfPlayer + numberOfBot) playerNumber = 1;
-
             players[playerNumber - 1].score -= 1;
         }
         printf("Your score is now : %d\n", players[playerNumber - 1].score);
-        sleep(4);
+        sleep(2);
         printf("\033[H\033[J");
     }
-    printf("partie terminée");
 
+    printf("Partie terminée\n\nScore:\n");
+    for (int i = 0; i < numberOfPlayer; i++) {
+        printf("Joueur %d - Score : %d\n", players[i].playerNumber, players[i].score);
+    }
+    printf("\n\n\n");
+    
     return 0;
 }
