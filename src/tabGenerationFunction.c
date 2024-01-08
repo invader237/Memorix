@@ -20,6 +20,16 @@ void strucGeneration(int *C, int *L) {
    *      -
    */
     do {
+        printf("Choisissez la valeur de L (3, 5, 7): ");
+        scanf("%d", L);
+
+
+        if (*L != 3 && *L != 5 && *L != 7) {
+            printf("Veuillez taper une valeur valide pour L\n");
+        }
+    } while (*L != 3 && *L != 5 && *L != 7);
+
+    do {
         printf("Choisissez la valeur de C (5, 7, 9): ");
         scanf("%d", C);
 
@@ -30,15 +40,6 @@ void strucGeneration(int *C, int *L) {
     } while (*C != 5 && *C != 7 && *C != 9);
 
 
-    do {
-        printf("Choisissez la valeur de L (3, 5, 7): ");
-        scanf("%d", L);
-
-
-        if (*L != 3 && *L != 5 && *L != 7) {
-            printf("Veuillez taper une valeur valide pour L\n");
-        }
-    } while (*L != 3 && *L != 5 && *L != 7);
 }
 
 void tabGeneration(int C, int L, int tab[L][C]) {
