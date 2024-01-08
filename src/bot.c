@@ -61,7 +61,8 @@ int botPlay(int numPlayer, int C, int L, int tab[][C], char layer[L][C][2]) {
     }
 
     if (firstCard == secCard) {
-        printf("Bot Player %d found a match!\n", numPlayer);
+        
+        printf("\033[H\033[J");
         layer[x1 - 1][x1 - 1][0] = 'X';
         layer[y1 - 1][x1 - 1][1] = 'X';
         tab[y1 - 1][x1 - 1] = -1;
@@ -71,9 +72,10 @@ int botPlay(int numPlayer, int C, int L, int tab[][C], char layer[L][C][2]) {
         tab[y2 - 1][x2 - 1] = -1;
 
         layerDisplay(C, L, layer);
+        printf("\nBot Player %d found a match!\n", numPlayer);
         return 1;
     } else {
-        printf("Bot Player %d did not find a match.\n", numPlayer);
+        printf("\nBot Player %d did not find a match.\n", numPlayer);
         return 0;
     }
 }

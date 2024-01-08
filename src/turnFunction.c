@@ -75,7 +75,7 @@ int play(int numPlayer, int C, int L, int tab[][C], char layer[L][C][2]) {
   }
 
   if(firstCard == secCard){
-
+    printf("\033[H\033[J");
     layer[x1-1][x1-1][0] = 'X';
     layer[y1-1][x1-1][1] = 'X';
     tab[y1-1][x1-1] = -1;
@@ -103,18 +103,19 @@ void getCardCoords(int *x, int *y, int C, int L) {
    * Return:
    *      - void
    */
-  while (1) {
-    printf("\ncolumn: ");
-    scanf("%d", x);
-    if (checkRange(*x, C)) break;
-    printf("The value exceeds the table size, please enter a value between 1 and %d\n", C);
-  }
 
   while (1) {
-    printf("row: ");
+    printf("\nrow: ");
     scanf("%d", y);
     if (checkRange(*y, L)) break;
     printf("The value exceeds the table size, please enter a value between 1 and %d\n", L);
+  }
+  
+  while (1) {
+    printf("column: ");
+    scanf("%d", x);
+    if (checkRange(*x, C)) break;
+    printf("The value exceeds the table size, please enter a value between 1 and %d\n", C);
   }
   printf("\n");
 }

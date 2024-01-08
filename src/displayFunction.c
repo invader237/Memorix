@@ -88,7 +88,7 @@ void layerReset(int C, int L, char layer[L][C][2]) {
      */
     for (int l = 0; l < L; l++) {
         for (int c = 0; c < C; c++) {
-            if(layer[l][c][0] != 'X'){
+            if(layer[l][c][0] != 'X' && layer[l][c][1] != 'X'){
                 layer[l][c][0] = '*';
                 layer[l][c][1] = '*';
             }     
