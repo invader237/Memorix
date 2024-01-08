@@ -3,13 +3,10 @@
 #include <string.h>
 #include "../include/displayFunctionHeader.h"
 
-#define CYAN    "\x1b[36m"
-#define GREEN   "\x1b[32m"
 #define YELLOW  "\x1b[33m"
-#define BLUE    "\x1b[34m"
 #define RESET   "\x1b[0m"
 
-void layerDisplay(char layer[][9][2], int C, int L) {
+void layerDisplay(int C, int L, char layer[L][C][2]) {
     /**
       * Displays the formatted layer line by line.
       *
@@ -50,7 +47,7 @@ void layerDisplay(char layer[][9][2], int C, int L) {
     }
 }
 
-void layerEdit(int x, int y, char layer[][9][2], int table[][9], int C, int L) {
+void layerEdit(int x, int y, int C, int L, char layer[L][C][2], int table[][C]) {
     /**
      * Edits the specified position in the layer based on the value from the table.
      *
@@ -67,15 +64,14 @@ void layerEdit(int x, int y, char layer[][9][2], int table[][9], int C, int L) {
      * Return:
      *      - void
      */
-    int value = table[y - 1][x - 1];
+    int value = table[y-1][x-1];
     // Tens digit
-    layer[y - 1][x - 1][0] = (char)('0' + value / 10);
-
+    layer[y-1][x-1][0] = (char)('0' + value / 10);
     // Units digit
-    layer[y - 1][x - 1][1] = (char)('0' + value % 10);
+    layer[y-1][x-1][1] = (char)('0' + value % 10);
 }
 
-void layerReset(char layer[][9][2], int C, int L) {
+void layerReset(int C, int L, char layer[L][C][2]) {
     /**
      * Resets all elements in the layer to '*'.
      *
@@ -92,8 +88,10 @@ void layerReset(char layer[][9][2], int C, int L) {
      */
     for (int l = 0; l < L; l++) {
         for (int c = 0; c < C; c++) {
-            layer[l][c][0] = '*';
-            layer[l][c][1] = '*';
+            if(layer[l][c][0] != 'X'){
+                layer[l][c][0] = '*';
+                layer[l][c][1] = '*';
+            }     
         }
     }
 }
