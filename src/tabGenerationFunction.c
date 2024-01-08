@@ -82,7 +82,7 @@ void tabRandomization(int C , int L, int tab[][C]){
     }
 }
 
-void randomSwap(int C, int L, int c, int l, int tab[][C]){
+void randomSwap(int C, int L, int c, int l, int tab[L][C]){
     int x = rand() % C;
     int y = rand() % L;
     int temp = tab[y][x];
