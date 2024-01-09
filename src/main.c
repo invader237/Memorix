@@ -39,7 +39,7 @@ int main(){
   int matchCounter = 0;
   int maxMatch;
   int numberOfPlayer = 0;
-  int numberOfBot;
+  int numberOfBot = 0;
   int turnScore = 0;
   int playerNumber = 1;
   struct Player players[4] = {{1, 0}, {2, 0}, {3, 0}, {4, 0}};
@@ -81,7 +81,7 @@ int main(){
     while (matchCounter != maxMatch) {
         layerDisplay(C, L, layer);
 
-        if (playerNumber <= numberOfPlayer) {
+        if (playerNumber <= numberOfPlayer || numberOfBot==0) {
             // Les joueurs humains jouent
             turnScore = play(playerNumber, C, L, tab, layer);
         } else {
