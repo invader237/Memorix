@@ -131,7 +131,7 @@ int checkRange(int number, int maxRange) {
    * Return:
    *      - int: 1 if the number is within the range, 0 otherwise.
    */
-  if (number<=maxRange && number>=0)return 1; //change the min to number >0 when implementing the CLI
+  if (number<=maxRange && number>0)return 1; //change the min to number >0 when implementing the CLI
   return 0;
 }
 
