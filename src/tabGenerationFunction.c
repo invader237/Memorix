@@ -22,6 +22,7 @@ void strucGeneration(int *C, int *L) {
     do {
         printf("Choisissez la valeur de L (3, 5, 7): ");
         scanf("%d", L);
+        while (getchar() != '\n');
 
 
         if (*L != 3 && *L != 5 && *L != 7) {
@@ -32,6 +33,7 @@ void strucGeneration(int *C, int *L) {
     do {
         printf("Choisissez la valeur de C (5, 7, 9): ");
         scanf("%d", C);
+        while (getchar() != '\n');
 
 
         if (*C != 5 && *C != 7 && *C != 9) {
