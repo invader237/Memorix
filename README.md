@@ -16,7 +16,7 @@ Or you can download the ZIP
 
 ## Start
 
-No library is required to run the game, you just have to compile it using this command then the /bin file :
+No library is needed to run the game, you just need to compile it using this command in the /bin directory :
 ```bash
 gcc -g -o main ../src/main.c ../src/displayFunction.c ../src/tabGenerationFunction.c ../src/turnFunction.c ../src/bot.c
 ```
@@ -36,7 +36,8 @@ Debugger:
 
 ### Note
 
-* Errors in the display may appear but are not critical.
+* Errors in the display may appear but are not critical. (display of " 0X " in the table when it should be " XX " or of " X* " when it should be " ** " )
+* There is a bug where, when a player has to choose his first card, if he gives a letter instead of a number when asked for the column, column three is selected by default (and this does not work for the second card even though it is the same function)
 * We have not deleted any branches from the project so that you can see the history of our work if necessary.
 
 ### Authors
