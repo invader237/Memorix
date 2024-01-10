@@ -117,7 +117,7 @@ void getCardCoords(int *x, int *y, int C, int L) {
     scanf("%d", x);
     while (getchar() != '\n');
     if (checkRange(*x, C)) break;
-    printf(RED"The value exceeds the table size, please enter a value between 1 and %d"RESET, C);
+    printf(RED"The value exceeds the table size, please enter a value between 1 and %d\n"RESET, C);
   }
   printf("\n");
 }
