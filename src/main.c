@@ -22,6 +22,7 @@ struct Player {
     int score;
 };
 
+
 int checkValue(int n){
   if(n>=1 && n<=4) return 1;
   return 0;
@@ -46,6 +47,9 @@ int main(){
   struct Player players[4] = {{1, 0}, {2, 0}, {3, 0}, {4, 0}};
   char botAnsw;
   srand((unsigned int)time(NULL));
+
+  printf("\033[H\033[J");
+  titleDisplay();
 
   strucGeneration(&C, &L);
   maxMatch = (C*L-1)/2;
@@ -103,7 +107,7 @@ int main(){
             playerNumber += 1;
             if (playerNumber > numberOfPlayer + numberOfBot) playerNumber = 1;
         } else if (turnScore == -1) {
-            printf(RED"You have found the joker.\nYou lost a point\n"RESET);
+            printf(RED"\nYou have found the joker.\nYou lost a point\n"RESET);
             playerNumber += 1;
             if (playerNumber > numberOfPlayer + numberOfBot) playerNumber = 1;
             players[playerNumber - 1].score -= 1;
