@@ -34,6 +34,7 @@ int checkBot(char answ){
 }
 
 
+
 int main(){
   int C, L;
   int matchCounter = 0;
@@ -63,16 +64,19 @@ int main(){
   while(!(checkValue(numberOfPlayer))){
     printf("Combien de joueur ? (1-4): ");
     scanf("%d", &numberOfPlayer);
+    while (getchar() != '\n');
   }
   if (numberOfPlayer < 4) {
         while (checkBot(botAnsw) == -1) {
             printf("Voulez-vous jouer contre un ordinateur (y/n) : ");
             scanf(" %c", &botAnsw);
+            while (getchar() != '\n');
         }
         if(checkBot(botAnsw)==1){
           while (!((numberOfBot <= 4-numberOfPlayer) && numberOfBot>=1)) {
               printf("Combien de bots ? (1-%d) : ", 4-numberOfPlayer);
               scanf("%d", &numberOfBot);
+              while (getchar() != '\n');
           }
         }   
     }
